@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: teste-abraao
-          image: 618889059366.dkr.ecr.us-east-1.amazonaws.com/teste-abraao:latest
+          image: abraaorochapb/teste-abraao:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
