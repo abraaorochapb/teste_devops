@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: teste-abraao-svc
+spec:
+  selector:
+    app: teste-abraao
+  ports:
+    - port: 80
+      targetPort: 80

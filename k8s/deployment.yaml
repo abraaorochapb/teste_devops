@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teste-abraao
+  labels:
+    app: teste-abraao
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: teste-abraao
+  template:
+    metadata:
+      labels:
+        app: teste-abraao
+    spec:
+      containers:
+        - name: teste-abraao
+          image: 618889059366.dkr.ecr.us-east-1.amazonaws.com/teste-abraao:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
