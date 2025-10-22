@@ -1,19 +1,34 @@
-#Imagem oficial do Node
-FROM node:24-alpine
+FROM node:24-alpine AS builder
 
-#Definindo o diretório de trabalho
 WORKDIR /app
 
-#Copiando os arquivos de dependências
+# Copia arquivos de dependências e as instala
 COPY package*.json ./
-
-#Instalando as dependências
 RUN npm ci
 
-#Copiando o restante dos arquivos da aplicação
+# Copia o restante para a etapa de build 
 COPY . .
+
+### Etapa final (menor imagem runtime)
+FROM node:24-alpine AS runtime
+
+WORKDIR /app
+
+# Copia apenas o que é necessário da etapa builder
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/server.js ./
+COPY --from=builder /app/package.json ./
+
+# Cria um usuário não-root para rodar a aplicação
+RUN addgroup -S appgroup \
+	&& adduser -S appuser -G appgroup
+
+# Ajusta permissões (caso tenha diretórios que precisem)
+RUN chown -R appuser:appgroup /app
 
 EXPOSE 80
 
-#Comando para iniciar a aplicação
+USER appuser
+
 CMD ["npm", "start"]
