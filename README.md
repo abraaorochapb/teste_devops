@@ -1,4 +1,4 @@
-# Modernização da Esteira de Deploy — Desafio DevOps
+# Modernização da Esteira de Deploy — Desafio DevOps.
 
 Este repositório contém a prova de conceito (PoC) para a primeira fase de
 modernização da infraestrutura e do ciclo de vida de uma aplicação web legada.
