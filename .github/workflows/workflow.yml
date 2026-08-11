@@ -32,7 +32,7 @@ jobs:
         docker build -t abraaorochapb/teste-abraao:${{ env.IMAGE_TAG }} .
 
     - name: Scan Docker image with Trivy (JSON report)
-      uses: aquasecurity/trivy-action@0.36
+      uses: aquasecurity/trivy-action@0.36.0
       with:
         image-ref: abraaorochapb/teste-abraao:${{ env.IMAGE_TAG }}
         format: json
